@@ -14,7 +14,7 @@ sayHello() //=> Hello!
 // Your solution for 00-sayHello (example) here:
 
 function sayHello() {
-  return 'Hello!'
+  return 'Hello!';
 }
 
 
@@ -34,7 +34,9 @@ addOne(-5) //=> -4
 -----------------------------------------------------------------*/
 // Your solution for 01-addOne here:
 
-
+function addOne(n){
+  return n+1;
+}
 
 
 
@@ -58,7 +60,9 @@ addTwoNumbers('Hello', 5) //=> NaN
 // Your solution for 02-addTwoNumbers here:
 
 
-
+function addTwoNumbers(x,y){
+  return x+y;
+}
 
 
 /*-----------------------------------------------------------------
@@ -80,7 +84,16 @@ sumNumbers([]) //=> 0
 -----------------------------------------------------------------*/
 // Your solution for 03-sumNumbers here:
 
-
+function sumNumbers (n){
+  var count = 0;
+  if (n) {
+    for (i=0; i<n.length; i++;){
+      count+=n[i];
+    }
+  } else {
+    return 0;
+  }
+}
 
 
 
