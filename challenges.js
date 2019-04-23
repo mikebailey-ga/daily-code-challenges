@@ -117,7 +117,16 @@ add(7,-12) //=> -5
 // Your solution for 04-addList here:
 
 
-
+function addList (){
+  if (arguments.length === 0){
+    return 0;
+  }
+  sum = 0;
+  arguments.forEach(n) {
+    sum+=n;
+  });
+  return sum;
+}
 
 
 /*-----------------------------------------------------------------
@@ -140,7 +149,12 @@ computeRemainder(10.5, 3) //=> 1.5
 -----------------------------------------------------------------*/
 // Your solution for 05-computeRemainder:
 
-
+function computeRemainder (x,y){
+  if (y===0){
+    return Infinity;
+  }
+  return x%y;
+}
 
 
 
