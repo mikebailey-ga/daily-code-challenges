@@ -165,8 +165,10 @@ Difficulty: basic
 
 Prompt:
 
-- Write a function called range that accepts two integers as arguments and returns an array of integers starting with the first argument up to one less than the second argument.
-- The range function must be called with the first argument less than or equal to the second argument, otherwise return the string "First argument must be less than second".
+- Write a function called range that accepts two integers as arguments and returns an array of integers
+starting with the first argument up to one less than the second argument.
+- The range function must be called with the first argument less than or
+ equal to the second argument, otherwise return the string "First argument must be less than second".
 
 Examples:
 
@@ -181,9 +183,12 @@ range(5,2) //=> "First argument must be less than second"
 function range(x,y){
   let array = [];
   if (x<y) {
-
+    for(i=x; i<y; i++){
+      array.push(i);
+    }
+    return array;
   } else {
-    return "First argumenbt must be less than second";
+    return "First argument must be less than second";
   }
 }
 
@@ -205,13 +210,13 @@ reverseUpcaseString("SEI Rocks!"); //=> "!SKCOR IES"
 
 
 function reverseUpcaseString(string){
-  let a = string.split();
+  let a = string.split('');
   let b = [];
-  for(i=a.length; i>=0; i--){
-    b.push(a[i]);
-  }
-  b.toString().toUpperCase();
-  return b;
+  a.forEach(function(c){
+    b.unshift(c);
+  });
+  let c = b.join('').toUpperCase();
+  return c;
 }
 
 
@@ -233,6 +238,9 @@ removeEnds('a'); //=> "" (empty string)
 // Your solution for 08-removeEnds here:
 
 function removeEnds(string){
+  if (string.length < 3){
+    return '';
+  }
   string = string.substring(1);
   string = string.substring(0, string.length - 1);
   return string;
@@ -247,8 +255,10 @@ Difficulty: Basic
 
 Prompt:
 
-- Write a function named charCount that accepts a single string argument and returns an object that represents the count of each character in the string.
-- The returned object should have keys that represent the character with its value set to the how many times the character appears in the string argument.
+- Write a function named charCount that accepts a single string argument and 
+returns an object that represents the count of each character in the string.
+- The returned object should have keys that represent the character with its 
+value set to the how many times the character appears in the string argument.
 - Upper and lower case characters should be counted separately.
 - Space characters should be count too.
 
@@ -259,7 +269,18 @@ charCount('Today is fantastic!') //=> { T: 1, o: 1, d: 1, a: 3, y: 1, ' ': 2, i:
 -----------------------------------------------------------------*/
 // Your solution for 09-charCount here:
 
-
+function charCount(string){
+  a = string.split('');
+  obj = {};
+  a.forEach(function(c){
+    if(c in obj){
+      obj[c]++;
+    } else{
+      obj[c] = 1;
+    }
+  });
+  return obj;
+}
 
 
 
@@ -285,7 +306,13 @@ formatWithPadding(1234, '*', 3); //=> "1234"
 -----------------------------------------------------------------*/
 // Your solution for 10-formatWithPadding here:
 
-
+function formatWithPadding(number, paddingChar, paddingLength){
+  if (number.toString().length >= paddingLength) {
+    return number;
+  } else {
+    return number.toString().padStart(paddingLength, paddingChar);
+  }
+}
 
 
 
@@ -296,7 +323,8 @@ Difficulty: Intermediate
 
 Prompt:
 
-- Write a function called isPalindrome that accepts a single string argument, then returns true or false depending upon whether or not the string is a palindrome.
+- Write a function called isPalindrome that accepts a single string argument, 
+then returns true or false depending upon whether or not the string is a palindrome.
 - A palindrome is a word or phrase that are the same forward or backward.
 - Casing and spaces are not included when considering whether or not a string is a palindrome.
 - If the length of the string is 0 or 1, return true.
@@ -310,7 +338,23 @@ isPalindrome(''); //=> true
 -----------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
 
-
+function isPalindrome(string){
+  if (string.length < 2){
+    return true;
+  } else {
+    let r = [];
+    string = string.replace(/\s+/g,'');
+    let a = string.toUpperCase().split('');
+    a.forEach(function(c){
+      r.unshift(c);      
+    });
+    p = r.join('');
+  }
+  if (string.toUpperCase()==p){
+    return true;
+  }
+  return false;
+}
 
 
 
@@ -321,10 +365,13 @@ Difficulty: Intermediate
 
 Prompt:
 
-In information theory, the hamming distance refers to the count of the differences between two strings of equal length.  It is used in computer science for such things as implementing "fuzzy search"  capability.
+In information theory, the hamming distance refers to the 
+count of the differences between two strings of equal length.  
+It is used in computer science for such things as implementing "fuzzy search"  capability.
 
 - Write a function named hammingDistance that accepts two arguments which are both strings of equal length.
-- The function should return the count of the symbols (characters, numbers, etc.) at the same position within each string that are different.
+- The function should return the count of the symbols (characters, numbers, etc.)
+ at the same position within each string that are different.
 - If the strings are not of the same length, the function should return NaN.
 
 Examples:
@@ -336,7 +383,21 @@ hammingDistance('abc', 'ab'); //=> NaN
 -----------------------------------------------------------------*/
 // Your solution for 12-hammingDistance here:
 
-
+function hammingDistance(first, second){
+  if (first.length != second.length) {
+    return NaN;
+  } else {
+    let count = 0;
+    firstArray = first.split('');
+    secondArray = second.split('');
+    for(i=0; i < firstArray.length -1; i++){
+      if(firstArray[i] != secondArray[i]){
+        count++;
+      }
+    }
+    return count;
+  }
+}
 
 
 
@@ -348,7 +409,9 @@ Difficulty: Intermediate
 Prompt:
 
 - Write a function called mumble that accepts a single string argument.
-- The function should return a string that has each character repeated the number of times according to its position within the string arg.  In addition, each repeated section of characters should be separated by a hyphen (-).
+- The function should return a string that has each character 
+repeated the number of times according to its position within the string arg.  
+In addition, each repeated section of characters should be separated by a hyphen (-).
 - Examples describe it best..
 
 Examples:
@@ -360,7 +423,18 @@ mumble('!A 2'); //=> '!-AA-   -2222'
 -----------------------------------------------------------------*/
 // Your solution for 13-mumble here:
 
-
+function mumble(string){
+  let count = 1;
+  let output = [];
+  stringArray = string.split('');
+  stringArray.forEach(function(c){
+    for (i=0; i<count; i++){
+      output.push(c);
+    }
+    count++;
+  });
+  return output.join('');
+}
 
 
 
@@ -372,7 +446,8 @@ Difficulty: Intermediate
 Prompt:
 
 - Write a function named fromPairs that creates an object from an array containing nested arrays.
-- Each nested array will have two elements representing key/value pairs used to create key/value pairs in an object to be returned by the function.
+- Each nested array will have two elements representing key/value pairs
+ used to create key/value pairs in an object to be returned by the function.
 - If a key appears in multiple pairs, the rightmost pair should overwrite previous the previous entry in the object.
 
 Examples:
@@ -383,8 +458,13 @@ fromPairs([ ['name', 'Sam"], ['age', 24], ['name', 'Sally'] ]) //=> { name: "Sal
 // Your solution for 14-fromPairs here:
 
 
-
-
+function fromPairs(array) {
+  object = {};
+  array.forEach(function(a){
+    object[a[0]] = a[1];
+  });
+  return object;
+}
 
 /*-----------------------------------------------------------------
 Challenge: 15-mergeObjects
@@ -393,8 +473,11 @@ Difficulty:  Intermediate
 
 Prompt:
 
-- Write a function named mergeObjects that accepts at least two objects as arguments, merges the properties of the second through n objects into the first object, then finally returns the first object.
-- If any objects have the same property key, values from the object(s) later in the arguments list should overwrite earlier values.
+- Write a function named mergeObjects that
+ accepts at least two objects as arguments, merges the properties of 
+ the second through n objects into the first object, then finally returns the first object.
+- If any objects have the same property key, values from the object(s)
+ later in the arguments list should overwrite earlier values.
 
 Examples:
 
