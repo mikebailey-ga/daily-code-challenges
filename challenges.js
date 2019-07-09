@@ -577,17 +577,10 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 //=> ["1 - rose", "2 - tulip", "3 - daisy"]
 -----------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
-/*
+
 function mapArray(array,cb) {
   return array.map(cb);
 }
-
-console.log(
-  mapArray( [1, 2, 3], function(n) {
-    return n * 2;
-  });
-);
-*/
 
 /*-----------------------------------------------------------------
 Challenge: 18-reduceArray
@@ -781,7 +774,7 @@ function balancedBrackets(string){
   let count = 0;
   a.forEach(function(c){
     if (c in pairs) {
-      /** loop reverse over string so far **/
+
     }
   });
 }
@@ -891,7 +884,12 @@ toCamelCase( 'A_b_c' ) // => 'ABC'
 -----------------------------------------------------------------*/
 // Your solution for 26-toCamelCase here:
 
-
+//I tried to one line it using the $ replace, but I couldn't then apply uppercase to it.
+function toCamelCase(string){
+  return string.replace(/[_-](.)/g, function(match){
+    return match.substr(1).toUpperCase();
+  });
+}
 
 
 
@@ -922,7 +920,9 @@ countTheBits( 65535 )  //=> 16
 // Your solution for 27-countTheBits here:
 
 
-
+function countTheBits(n) {
+  return n.toString(2).match(/[1]/g||[]).length;
+}
 
 
 /*-----------------------------------------------------------------
@@ -980,8 +980,29 @@ addChecker( [10, 15, 16, 22], 19 ) // => false
 // Your solution for 29-addChecker here:
 
 
+//I learned here that return will not break out
+//of a function from inside a forEach. And break won't stop the loop.
+//A normal loop is more effecient I think since it can break early.
+/*
+function addChecker(array, n){
+  let bool = null;
+  array.forEach(function(x){
+    if (array.includes(n-x)){
+      bool = true;
+    }
+  });
+  return bool ? true : false;
+}
+*/
 
-
+function addChecker(array,n) {
+  for (i=0; i<array.length; i++) {
+    if (array.includes(n-array[i])) {
+      return true;
+    }
+  }
+  return false;
+}
 
 /*-----------------------------------------------------------------
 Challenge: 30-totalTaskTime
@@ -991,9 +1012,12 @@ Difficulty:  Difficult
 Prompt:
 
 - Write a function called totalTaskTime that accepts two arguments.
-- The first argument is an array of integers referred to as a "queue".  Each integer in the queue represents a "task", more specifically, the amount of time to complete that task.
-- The second argument is an integer representing the number of CPU "threads" available to process all of the tasks in the queue.
-- The totalTaskTime function should return an integer representing the total time it is going to take to complete all of the tasks in the queue.
+- The first argument is an array of integers referred to as a "queue".  
+Each integer in the queue represents a "task", more specifically, the amount of time to complete that task.
+- The second argument is an integer representing the number of CPU "threads" 
+available to process all of the tasks in the queue.
+- The totalTaskTime function should return an integer representing the total
+ time it is going to take to complete all of the tasks in the queue.
 - You may mutate the "queue" array (first argument) if you wish.
 
 Hint:
