@@ -487,8 +487,16 @@ mergeObjects({a: 1, b: 2, c: 3}, {d: 4}, {b: 22, d: 44});  //=> {a: 1, b: 22, c:
 -----------------------------------------------------------------*/
 // Your solution for 15-mergeObjects here:
 
-
-
+/*
+function mergeObjects(a,b) {
+  output = {};
+  for (object in arguments)
+    for (let key in object){
+      output[key] = object[key];
+    }
+  }
+}
+*/
 
 
 /*-----------------------------------------------------------------
@@ -524,8 +532,21 @@ findHighestPriced([
 -----------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
 
+function findHighestPriced(array){
+  let sku = null;
+  let highestPrice = 0;
+  array.forEach(function(item){
+    if (item['price'] > highestPrice){
+      highestPrice = item['price'];
+      sku = item['sku'];
+    }
+  });
 
-
+  let index =  array.findIndex(function(item){
+    return item['sku'] == sku;
+  });
+  return array[index];
+}
 
 
 /*-----------------------------------------------------------------
@@ -539,7 +560,9 @@ The goal is of this challenge is to write a function that performs the functiona
 
 - Write a function named mapArray that accepts two arguments: a single array and a callback function.
 - The mapArray function should return a new array of the same length as the array argument.
-- The mapArray function should iterate over each element in the array (first arg).  For each iteration, invoke the callback function (2nd arg), passing to it as arguments, the current element and its index.  Whatever is returned by the callback function should be included in the new array at the index of the current iteration.
+- The mapArray function should iterate over each element in the array (first arg).  For each iteration,
+ invoke the callback function (2nd arg), passing to it as arguments, the current element and its index. 
+  Whatever is returned by the callback function should be included in the new array at the index of the current iteration.
 
 Examples:
 
@@ -554,10 +577,17 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 //=> ["1 - rose", "2 - tulip", "3 - daisy"]
 -----------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
+/*
+function mapArray(array,cb) {
+  return array.map(cb);
+}
 
-
-
-
+console.log(
+  mapArray( [1, 2, 3], function(n) {
+    return n * 2;
+  });
+);
+*/
 
 /*-----------------------------------------------------------------
 Challenge: 18-reduceArray
@@ -612,7 +642,8 @@ Prompt:
 
 Hint:
 
-- This assignment provides an excellent opportunity to use recursion (a function that calls itself).  It can also be solved by using an inner function.
+- This assignment provides an excellent opportunity to use recursion (a function that calls itself).  
+It can also be solved by using an inner function.
 
 Examples:
 
@@ -624,9 +655,9 @@ flatten( [1, [2, [3, [4]]], 1, 'a', ['b', 'c']] );
 -----------------------------------------------------------------*/
 // Your solution for 19-flatten here:
 
-
-
-
+function flatten(array){
+  return array.flat(Infinity);
+}
 
 /*-----------------------------------------------------------------
 Challenge: 20-isPrime
@@ -635,7 +666,8 @@ Difficulty: Intermediate
 
 Prompt:
 
-- Write a function named isPrime that returns true when the integer argument passed to it is a prime number and false when the argument passed to it is not prime.
+- Write a function named isPrime that returns true when the integer argument passed to it is a prime number 
+and false when the argument passed to it is not prime.
 - A prime number is a whole number (integer) greater than 1 that is evenly divisible by only itself.
 
 Examples:
@@ -649,7 +681,14 @@ isPrime(200) //=> false
 // Your solution for 20-isPrime here:
 
 
-
+function isPrime(n){
+  for (i=2; i<n; i++){
+    if (n%i===0){
+      return false;
+    }
+  }
+  return true;
+}
 
 
 /*-----------------------------------------------------------------
@@ -660,7 +699,8 @@ Difficulty: Intermediate
 Prompt:
 
 Now that you have solved the last challenge of determining if a whole number is prime, let's expand upon that concept to...
-- Write a function named primeFactors that accepts a whole number greater than one (1) as an argument and returns an array of that argument's prime factors.
+- Write a function named primeFactors that accepts a whole number greater than one (1) as an
+ argument and returns an array of that argument's prime factors.
 - The prime factors of a whole number are the prime numbers that, when multiplied together, equals the whole number.
 - If the argument provided is not greater than 1, or not a whole number, then primeFactors should return an empty array.
 
@@ -687,7 +727,8 @@ Difficulty: Intermediate
 
 Prompt:
 
-- Write a function named intersection that accepts two arguments which are both arrays.  The array arguments may contain any mixture of strings, numbers and/or booleans - but no reference types, i.e., objects.
+- Write a function named intersection that accepts two arguments which are both arrays.  
+The array arguments may contain any mixture of strings, numbers and/or booleans - but no reference types, i.e., objects.
 - The function should return a new array containing all elements in common, including repeating element values.
 - The ordering of the elements in the returned is not important.
 - If there are no elements in the arrays in common,  the intersection function should return an empty array.
@@ -713,9 +754,12 @@ Difficulty:  Intermediate
 Prompt:
 
 - Write a function called balancedBrackets that accepts a single string as argument.
-- The input string is composed entirely of parentheses, brackets and/or curly braces, i.e.,  (), [] and/or {}. Referred to as "braces" from this point forward...
-- The balancedBraces function should return true if the string's braces are "balanced" and false if they are not.
-- The brackets are considered unbalanced if any closing bracket does not close the same type of opening bracket, ignoring already matched brackets between them.  Examples explain it best...
+- The input string is composed entirely of parentheses, brackets and/or curly braces, i.e., 
+ (), [] and/or {}. Referred to as "braces" from this point forward...
+- The balancedBraces function should return true if the string's braces are "balanced" and
+ false if they are not.
+- The brackets are considered unbalanced if any closing bracket does not close the same type
+ of opening bracket, ignoring already matched brackets between them.  Examples explain it best...
 
 Examples:
 
@@ -727,7 +771,20 @@ balancedBrackets( '[({}[])]' ) // => true
 -----------------------------------------------------------------*/
 // Your solution for 23-balancedBrackets here:
 
-
+function balancedBrackets(string){
+  let pairs = {
+    ')': '(',
+    ']': '[',
+    '}': '{'
+  }
+  let a = string.split('');
+  let count = 0;
+  a.forEach(function(c){
+    if (c in pairs) {
+      /** loop reverse over string so far **/
+    }
+  });
+}
 
 
 
@@ -739,9 +796,12 @@ Difficulty:  Intermediate
 Prompt:
 
 - Write a function called isWinningTicket that accepts a single array an as argument.
-- The input array represents a 'lottery ticket' consisting of one or more nested 2-value arrays.  The first value of a nested array will be a string, the second an integer.
-- The isWinningTicket function should return true if all of the nested arrays have a character in the string whose numeric character code equals the integer (2nd value).
-- If any of the nested arrays have a string where all of the character's character code does not match the integer, then return false.
+- The input array represents a 'lottery ticket' consisting of one or more nested 2-value arrays.  
+The first value of a nested array will be a string, the second an integer.
+- The isWinningTicket function should return true if all of the nested arrays have a character in the string 
+whose numeric character code equals the integer (2nd value).
+- If any of the nested arrays have a string where all of the character's character code does not match the
+ integer, then return false.
 
 Hints:
 
@@ -758,6 +818,9 @@ isWinningTicket( [ ['ABC', 66], ['dddd', 15], ['Hello', 108] ] ) // => false
 // Your solution for 24-isWinningTicket here:
 
 
+function isWinningTicket(array){
+  
+}
 
 
 
@@ -769,14 +832,21 @@ Difficulty:  Intermediate
 Prompt:
 
 - Write a function called getNumForIP that accepts a single string as argument.
-- The input string is formatted as an IP address, such as '192.156.99.15'.  IP addresses are used in networking and are actually 32-bit integers.  However, those that work with networks find it more convenient to work with these numbers as four 8-bit integers, separated by a 'dot' character.
+- The input string is formatted as an IP address, such as '192.156.99.15'.  IP addresses are used in networking and are
+ actually 32-bit integers.  However, those that work with networks find it more convenient to work with 
+ these numbers as four 8-bit integers, separated by a 'dot' character.
 - The getNumForIP function should return the numeric value of the string IP address being passed in as an argument.
 
 Hints:
 
 - Each 8-bit number can hold a value between 0 and 256.
-- An IP's right most 8-bit number represents how many of 256 raised to the power of 0 (equals 1) there are.  The next 8-bit number represents how many of 256 raised to the power of 1 (256) there are, etc.  For example, if you took the right-most two 8-bit numbers of the IP address 192.156.99.15, you would have 15 * (256 ** 0), which equals 15, and 99 * (256**1), which equals 25344.
-- To compute the numeric value for an IP address, you first compute the value for each of the four 8-bit chunks (as described in the above hint), and add them together!
+- An IP's right most 8-bit number represents how many of 256 raised 
+to the power of 0 (equals 1) there are.  The next 8-bit number represents 
+how many of 256 raised to the power of 1 (256) there are, etc.  For example, if you took the right-most 
+two 8-bit numbers of the IP address 192.156.99.15, you would have 15 * (256 ** 0), which equals 15,
+ and 99 * (256**1), which equals 25344.
+- To compute the numeric value for an IP address, you first compute the
+ value for each of the four 8-bit chunks (as described in the above hint), and add them together!
 
 Examples:
 
@@ -787,7 +857,14 @@ getNumForIP( '10.0.0.1' ) // => 167772161
 -----------------------------------------------------------------*/
 // Your solution for 25-getNumForIP here:
 
-
+function getNumForIP(string){
+  eightBit = string.split('.');
+  return (
+  (Math.pow(256,0) * eightBit[3]) +
+  (Math.pow(256,1) * eightBit[2]) +
+  (Math.pow(256,2) * eightBit[1]) +
+  (Math.pow(256,3) * eightBit[0]));
+}
 
 
 
