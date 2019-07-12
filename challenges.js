@@ -812,10 +812,20 @@ isWinningTicket( [ ['ABC', 66], ['dddd', 15], ['Hello', 108] ] ) // => false
 
 
 function isWinningTicket(array){
-  
+  let winner = true;
+  let ticketArray = null;
+  for (let ticket of arguments) {
+    ticketArray = ticket[0].split('');
+    if (String.fromCharCode(ticket[1]) in ticketArray) {
+      continue;
+    } else {
+      winner = false;
+    }
+  }
+  return winner;
 }
 
-
+console.log(isWinningTicket(['ABC'],43));
 
 /*-----------------------------------------------------------------
 Challenge: 25-getNumForIP
